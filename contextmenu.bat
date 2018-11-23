@@ -76,9 +76,9 @@ if /i [%1]==[add] (
 		:: Add command
 		reg add HKCR\Directory\Background\shell\%3\command /d %5 /f
 		:: Add extended
-		if [%6]==[1] reg add HKCR\Directory\Background\shell\%3 /v Extended /d [] /f
+		if [%6]==[1] reg add HKCR\Directory\Background\shell\%3 /v Extended /d "" /f
 		:: Add icon
-		if [%7] NEQ [] reg add HKCR\Directory\Background\shell\%3 /v Icon /d [] /f
+		if [%7] NEQ [] reg add HKCR\Directory\Background\shell\%3 /v Icon /d %7 /f
 		goto :EOF
 	)
 	if /i [%2]==[lib] (
