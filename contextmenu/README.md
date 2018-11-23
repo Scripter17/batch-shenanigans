@@ -1,7 +1,9 @@
 # Contextmenu
 ![Jank: 100%](https://img.shields.io/badge/Jank-100%25-red.svg)
+
 You know that menu that shows up whenever you right-click a file? That thing is called a context menu. Many programs modify it in order to make using said program more convenient.
-You may want to add some stuff to it yourself, but going through the registry can be a hassle, and using a program might not give you all the features you want. That is why I created this program. It is a simple command-line interface that allows you to add stuff to the context menu simply.
+
+You may want to add some stuff to it yourself, but going through the registry can be a hassle, and using a program might not give you all the features you want. That is why I created this program. It's a simple command-line interface that allows you to add stuff to the context menu simply.
 ## The help command
 ```batch
 contextmenu /?
@@ -26,5 +28,7 @@ A simple use for editing the context menu is having an "Open CMD Here" button. H
 contextmenu add dir cmd_here "Open CMD here" cmd.exe 0 "C:\WINDOWS\system32\cmd.exe, 0"
 ```
 This command adds the following item to the context menu for folder backgrounds.
+
 ![Error: Image failed to load](https://raw.githubusercontent.com/Scripter17/batch-shenanigans/master/assets/context1.png)
+
 So instead of running `cd C:\Path\to\folder\`, just open the folder in the file explorer, and click "Open CMD Here"!
