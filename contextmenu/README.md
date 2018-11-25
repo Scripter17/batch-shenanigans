@@ -9,26 +9,38 @@ You may want to add some stuff to it yourself, but going through the registry ca
 contextmenu /?
 ```
 
-## Basic usage
+## Usage
+This command has the following syntax:
+Function | Syntax
+:-:|:-:
+Adding an item | `contextmenu [pre|] add [type] [name] [display] [cmd] [extended|] [icon|]`
+Removing an item | `contextmenu [pre|] del [type] [name]`
+
+Parameter | Description | Input format
+:-:|:-|:-:
+`[pre|]` | (Optional) An experimental feature that lets you add context menu items to single users at a time.<br/>When set to `"pre=HKCU\Software\Classes"`, the rest of the command will only affect the current user. When excluded, this defaults to `"pre=HKCR"`. | `"pre=[registry path]"`
+`[type]`|The type of file/folder to apply the context item to.<br/>Example values:<br/>`Directory\Background` - Folder backgrounds (explorer and desktop)<br/>`LibraryFolder\Background` - The same as `Directory`, but for folders in a library (Pictures, Documents, etc.)<br/>`Directory` - Like `Directory\Background`, except it's for directory items in a folder. (Right clicking a link to `/stuff`, and not inside `/stuff`)<br/>`.[file extension]` - Right clicking files of a certain extension in a directory<br/>`*` - Right clicking files of any extension|String
+`[name]`|The internal name of the registry key holding the context menu item.|String without spaces
+`[display]`|The name of the item that appears in the context menu.|String, put `&` before a keyboard shortcut.<br/>(`&CMD` will activate when `C` is pressed)
+`[cmd]`|The command to run when the item is clicked.|String<br/>`"cmd /c [commands]"` if it's meant to run batch code
+`[extended|]`|(Optional) `1` if the item should only appear when the user is holding shift, any other value otherwise.|See left
+`[icon|]`|A path to an icon for the menu item.<br/>If the icon is in a `.dll` file, you might need to add `, [number]` after the file name to get the right icon. For more info, just Google it.|String
+
+
+## Examples
+
+A common use of editing the context menu is simply to add an "Open CMD here" item. To do this with the `contextmenu` command, simply run the following:
+
 ```batch
-contextmenu add [dir|lib] [name] [display] [cmd]
+contextmenu add Directory\Background cmd_here "Open CMD here" cmd.exe 0 "C:\WINDOWS\system32\cmd.exe"
 ```
-This adds an item to the context menu that is displayed as `[display]`, and runs `[cmd]` when clicked. `[name]` is simply the name given to the registry key containing the item.
-Note: Library folders (Documents, Pictures, etc.) are not affected by `contextmenu add dir ...` commands, and vice versa. There's probably some other example of this, and if so, please tell me.
 
-Now some context menu items only appear when you're holding `shift`, and some even have icons. I have implemented this by adding the `[extended]` and `[icon]` parameters:
+Or, if you don't have admin access or if you only want to add the item for yourself:
+
 ```batch
-contextmenu add [dir|lib] [name] [display] [cmd] [extension|] [icon|]
+contextmenu "pre=HKCU\Software\Classes" add Directory\Background cmd_here "Open CMD here" cmd.exe 0 "C:\WINDOWS\system32\cmd.exe"
 ```
-Due to some batch quirkiness and programmer laziness, the `[extension]` parameter only does anything if its value is `1`.
 
-## Concrete example
-A simple use for editing the context menu is having an "Open CMD Here" button. Hence it is the perfect example command to show.
-```batch
-contextmenu add dir cmd_here "Open CMD here" cmd.exe 0 "C:\WINDOWS\system32\cmd.exe, 0"
-```
-This command adds the following item to the context menu for folder backgrounds.
+Now, this syntax is... unwieldy, at best. But, if you dissect it, it's clear that it is far more practical than editing the registry manually.
 
-![Error: Image failed to load](https://raw.githubusercontent.com/Scripter17/batch-shenanigans/master/assets/context1.png)
-
-So instead of running `cd C:\Path\to\folder\`, just open the folder in the file explorer, and click "Open CMD Here"!
+So, what if you want to remove the item? Use `contextmenu del Directory\background cmd_here`, or, for the second current-user-only command, `contextmenu "path=HKCU\Software\Classes" del Directory\background cmd_here`.
