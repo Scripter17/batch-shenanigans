@@ -11,6 +11,7 @@ contextmenu /?
 
 ## Usage
 This command has the following syntax:
+
 Function | Syntax
 :-:|:-:
 Adding an item | <code>contextmenu [pre&#124;] add [type] [name] [display] [cmd] [extended&#124;] [icon&#124;]</code>
@@ -26,6 +27,10 @@ Parameter | Description | Input format
 <code>[extended&#124;]</code>|(Optional) `1` if the item should only appear when the user is holding shift, any other value otherwise.|See left
 <code>[icon&#124;]</code>|A path to an icon for the menu item.<br/>If the icon is in a `.dll` file, you might need to add `, [number]` after the file name to get the right icon. For more info, just Google it.|String
 
+### The GUI
+This command also comes with two extra files: `contextmenu.ahk` and `contextmenu.ahk.exe`. `contextmenu.ahk` is an [AutoHotKey](https://www.autohotkey.com/) script that gives a simple GUI interface for adding and deleting items without using command prompt. `contextmenu.ahk.exe` is an exe version of the script, for use on computers without AHK installed.
+
+![The GUI](assets/gui1.png)
 
 ## Examples
 
