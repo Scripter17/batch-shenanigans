@@ -30,7 +30,7 @@ Parameter | Description | Input format
 ### The GUI
 This command also comes with two extra files: `contextmenu.ahk` and `contextmenu.ahk.exe`. `contextmenu.ahk` is an [AutoHotKey](https://www.autohotkey.com/) script that gives a simple GUI interface for adding and deleting items without using command prompt. `contextmenu.ahk.exe` is an exe version of the script, for use on computers without AHK installed.
 
-![The GUI](assets/gui1.png)
+![The GUI](/assets/gui1.png)
 
 ## Examples
 
